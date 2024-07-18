@@ -1,6 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Crypto Exchange App
 
-## Getting Started
+This project is a web-based dashboard for a cryptocurrency exchange platform, built using Next.js. It provides visualizations of cryptocurrency data, including candlestick charts and order books for various cryptocurrencies.
+
+## Features
+
+- **Dynamic Cryptocurrency Selection**: Users can select different cryptocurrencies from a dropdown menu to view their respective candlestick chart and order book data.
+- **Real-Time Order Book**: Incorporates real-time data to dynamically display order book statuses using WebSocket.
+
+## Technologies Used
+
+- **Tailwind CSS & shadcn/ui**: A utility-first CSS framework and accessible components library as one of the quickest ways to use a design system.
+- **lightweight-charts**: A lightweight and feature rich charts library, that is used to display the candlestick chart in this application.
+
+## Running the application
 
 First, run the development server:
 
@@ -14,23 +26,8 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Sidenote
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+If the data from the Order Book section is not showing, a VPN connection might be needed to successfully access the API used with the WebSocket.
