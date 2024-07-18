@@ -9,6 +9,7 @@ This project is a web-based dashboard for a cryptocurrency exchange platform, bu
 
 ## Technologies Used
 
+Asides from React and Next.js, there are several notable libraries that are being used:
 - **Tailwind CSS & shadcn/ui**: A utility-first CSS framework and accessible components library as one of the quickest ways to use a design system.
 - **lightweight-charts**: A lightweight and feature rich charts library, that is used to display the candlestick chart in this application.
 
@@ -31,3 +32,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ### Sidenote
 
 If the data from the Order Book section is not showing, a VPN connection might be needed to successfully access the API used with the WebSocket.
+
+## Screenshots
+[Desktop](https://github.com/user-attachments/assets/b4dde0d8-f9cb-4297-9023-a2e467b28853)
+
+[Mobile](https://github.com/user-attachments/assets/0f55468c-58ad-41b0-98b3-a8775d0014fd)
