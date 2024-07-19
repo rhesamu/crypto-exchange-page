@@ -4,8 +4,13 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 
 import SymbolSelect from '@/components/SymbolSelect';
-const CandlestickChart = dynamic(() => import('@/components/CandlestickChart'));
-const OrderBook = dynamic(() => import('@/components/OrderBook'));
+const CandlestickChart = dynamic(
+  () => import('@/components/CandlestickChart'),
+  { ssr: false }
+);
+const OrderBook = dynamic(() => import('@/components/OrderBook'), {
+  ssr: false
+});
 
 export default function TradingPage() {
   const [symbol, setSymbol] = useState('BTC');

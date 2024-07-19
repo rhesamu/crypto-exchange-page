@@ -1,19 +1,17 @@
 import { useEffect, useState } from 'react';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from '@/components/ui/table';
+
+import MobileTable from './MobileTable';
+import DesktopTable from './DesktopTable';
+
 import { getSymbol } from './utils';
+import { useMobileSize } from '@/lib/hooks';
+
 interface Order {
   price: string;
   amount: string;
 }
 
-interface OrderBook {
+export interface OrderBook {
   bids: Order[];
   asks: Order[];
 }
@@ -22,10 +20,12 @@ interface OrderBookProps {
   market: string;
 }
 
-const OrderBook: React.FC<OrderBookProps> = ({
+const OrderBookComponent: React.FC<OrderBookProps> = ({
   symbol = 'XBT',
   market = 'USD'
 }) => {
+  const isMobile = useMobileSize(768);
+
   const [orderBook, setOrderBook] = useState<OrderBook>({
     bids: [{ price: '', amount: '' }],
     asks: [{ price: '', amount: '' }]
@@ -61,30 +61,13 @@ const OrderBook: React.FC<OrderBookProps> = ({
   return (
     <div className="order-book">
       <h2 className="mb-2 text-xl font-semibold">Order Book</h2>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="p-1">Price</TableHead>
-            <TableHead className="p-1">Amount</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {orderBook.asks.map((ask, index) => (
-            <TableRow key={`ask-${index}`} className="text-red-500">
-              <TableCell className="p-1">{ask.price}</TableCell>
-              <TableCell className="p-1">{ask.amount}</TableCell>
-            </TableRow>
-          ))}
-          {orderBook.bids.map((bid, index) => (
-            <TableRow key={`bid-${index}`} className="text-green-500">
-              <TableCell className="p-1">{bid.price}</TableCell>
-              <TableCell className="p-1">{bid.amount}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      {isMobile ? (
+        <MobileTable orderBook={orderBook} />
+      ) : (
+        <DesktopTable orderBook={orderBook} />
+      )}
     </div>
   );
 };
 
-export default OrderBook;
+export default OrderBookComponent;
