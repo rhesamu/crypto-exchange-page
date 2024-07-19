@@ -73,7 +73,7 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ symbol, market = 'U
     }
   }, [isDarkMode]);
   
-  return <div className='md:h-[720px] h-[480px]' ref={chartContainerRef} />;
+  return <div className='candlestick-chart md:h-[720px] h-[480px]' ref={chartContainerRef} />;
 };
 
 export default CandlestickChart;

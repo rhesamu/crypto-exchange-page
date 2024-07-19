@@ -1,31 +1,31 @@
 import { useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-
+import { getSymbol } from './utils';
 interface Order {
-  price: number;
-  amount: number;
+  price: string;
+  amount: string;
 }
 
 interface OrderBook {
+  bids: Order[];
+  asks: Order[];
+}
+interface OrderBookProps {
   symbol: string;
   market: string;
 }
 
-const mappedSymbol: { [dict_key: string]: string } = {
-  BTC: 'XBT'
-}
-
-const OrderBook: React.FC<OrderBook> = ({
+const OrderBook: React.FC<OrderBookProps> = ({
   symbol = 'XBT',
   market = 'USD'
 }) => {
-  const [orderBook, setOrderBook] = useState({
-    bids: [{ price: null, amount: null }],
-    asks: [{ price: null, amount: null }]
+  const [orderBook, setOrderBook] = useState<OrderBook>({
+    bids: [{ price: '', amount: '' }],
+    asks: [{ price: '', amount: '' }]
   })
 
   useEffect(() => {
-    const usedSymbol: string = mappedSymbol[symbol] || symbol;
+    const usedSymbol = getSymbol(symbol);
     const ws = new WebSocket(
       `wss://ws.bitmex.com/realtime?subscribe=orderBook10:${usedSymbol}${market}`
     );
@@ -48,7 +48,7 @@ const OrderBook: React.FC<OrderBook> = ({
   }, [symbol, market]);
 
   return (
-    <div>
+    <div className='order-book'>
       <h2 className="text-xl font-semibold mb-2">Order Book</h2>
       <Table>
         <TableHeader>
