@@ -16,14 +16,17 @@ export default function TradingPage() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Crypto Exchange</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <h1 className="mb-4 text-2xl font-bold">Crypto Exchange</h1>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <div className="col-span-2">
-          <SymbolSelect handleSelectChange={handleSelectChange} defaultValue={symbol} />
-          <CandlestickChart symbol={symbol} market='USD' />
+          <SymbolSelect
+            handleSelectChange={handleSelectChange}
+            defaultValue={symbol}
+          />
+          <CandlestickChart symbol={symbol} market="USD" />
         </div>
         <div>
-          <OrderBook symbol={symbol} market='USD' />
+          <OrderBook symbol={symbol} market="USD" />
         </div>
       </div>
     </div>

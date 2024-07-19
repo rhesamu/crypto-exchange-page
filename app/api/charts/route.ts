@@ -26,15 +26,17 @@ export async function GET(req: Request) {
     const { from, to } = getDates();
 
     if (!symbol || !market) {
-      return new Response('Missing symbol or market query parameters', { status: 400 });
+      return new Response('Missing symbol or market query parameters', {
+        status: 400
+      });
     }
 
     const url = `${BASE_URL}/aggs/ticker/X:${symbol}${market}/range/1/day/${from}/${to}?adjusted=true&sort=asc`;
     const headers = {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${process.env.POLYGON_API_KEY}`
+      Authorization: `Bearer ${process.env.POLYGON_API_KEY}`
     };
-  
+
     const res = await fetch(url, { headers });
     const json = await res.json();
     const transformed: { results: CandlestickResponse[] } = {

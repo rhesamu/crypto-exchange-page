@@ -8,23 +8,30 @@ interface CandlestickChartProps {
   market: string;
 }
 
-const CandlestickChart: React.FC<CandlestickChartProps> = ({ symbol, market = 'USD' }) => {
+const CandlestickChart: React.FC<CandlestickChartProps> = ({
+  symbol,
+  market = 'USD'
+}) => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
-  const seriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
+  const seriesRef = useRef<ISeriesApi<'Candlestick'> | null>(null);
 
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-      setIsDarkMode(e.matches);
-    });
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', (e) => {
+        setIsDarkMode(e.matches);
+      });
 
     setIsDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
 
     return () => {
-      window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', () => {});
-    }
+      window
+        .matchMedia('(prefers-color-scheme: dark)')
+        .removeEventListener('change', () => {});
+    };
   }, []);
 
   useEffect(() => {
@@ -41,7 +48,9 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ symbol, market = 'U
 
       const fetchData = async () => {
         try {
-          const response = await fetch(`/api/charts?symbol=${symbol}&market=${market}`);
+          const response = await fetch(
+            `/api/charts?symbol=${symbol}&market=${market}`
+          );
           const { data } = await response.json();
 
           candlestickSeries.setData(data.results);
@@ -72,8 +81,13 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ symbol, market = 'U
       chartRef.current.applyOptions(chartOptions);
     }
   }, [isDarkMode]);
-  
-  return <div className='candlestick-chart md:h-[720px] h-[480px]' ref={chartContainerRef} />;
+
+  return (
+    <div
+      className="candlestick-chart h-[480px] md:h-[720px]"
+      ref={chartContainerRef}
+    />
+  );
 };
 
 export default CandlestickChart;

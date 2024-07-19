@@ -1,10 +1,16 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select';
 import cryptoList from '@/lib/cryptoList';
 
 interface SymbolSelectProps {
   handleSelectChange: (value: string) => void;
   defaultValue: string;
-};
+}
 
 const SymbolSelect: React.FC<SymbolSelectProps> = ({
   handleSelectChange,
@@ -12,7 +18,7 @@ const SymbolSelect: React.FC<SymbolSelectProps> = ({
 }) => {
   return (
     <Select defaultValue={defaultValue} onValueChange={handleSelectChange}>
-      <SelectTrigger className="w-[180px] mb-1">
+      <SelectTrigger className="mb-1 w-[180px]">
         <SelectValue placeholder="Choose currency..." />
       </SelectTrigger>
       <SelectContent>
@@ -27,6 +33,6 @@ const SymbolSelect: React.FC<SymbolSelectProps> = ({
       </SelectContent>
     </Select>
   );
-}
+};
 
 export default SymbolSelect;
