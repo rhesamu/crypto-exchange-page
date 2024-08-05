@@ -1,4 +1,6 @@
-const list = [
+import { Symbol } from '@/lib/types';
+
+const list: Symbol[] = [
   {
     code: 'BTC',
     name: 'Bitcoin'
