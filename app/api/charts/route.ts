@@ -13,24 +13,24 @@ interface CandlestickResponse {
 }
 
 export async function GET(req: Request) {
+  const apiKey = process.env.POLYGON_API_KEY;
+
+  if (!apiKey) {
+    return new Response('API key not configured', { status: 500 });
+  }
+
+  const { searchParams } = new URL(req.url);
+  const symbol = searchParams.get('symbol');
+  const market = searchParams.get('market');
+  const { from, to } = getDates();
+
+  if (!symbol || !market) {
+    return new Response('Missing symbol or market query parameters', {
+      status: 400
+    });
+  }
+
   try {
-    const apiKey = process.env.POLYGON_API_KEY;
-
-    if (!apiKey) {
-      return new Response('API key not configured', { status: 500 });
-    }
-
-    const { searchParams } = new URL(req.url);
-    const symbol = searchParams.get('symbol');
-    const market = searchParams.get('market');
-    const { from, to } = getDates();
-
-    if (!symbol || !market) {
-      return new Response('Missing symbol or market query parameters', {
-        status: 400
-      });
-    }
-
     const url = `${BASE_URL}/aggs/ticker/X:${symbol}${market}/range/1/day/${from}/${to}?adjusted=true&sort=asc`;
     const headers = {
       'Content-Type': 'application/json',
