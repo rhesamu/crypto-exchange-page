@@ -7,7 +7,7 @@ import {
   TableRow
 } from '@/components/ui/table';
 
-import { OrderBook } from '@/components/OrderBook';
+import { OrderBook } from '@/lib/types';
 
 const MobileTable: React.FC<{ orderBook: OrderBook }> = ({ orderBook }) => {
   return (

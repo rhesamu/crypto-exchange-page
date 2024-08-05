@@ -2,16 +2,16 @@ import { useState, useRef, useEffect } from 'react';
 import { createChart, IChartApi, ISeriesApi } from 'lightweight-charts';
 
 import { getChartOptions, getCandlestickSeriesOptions } from './utils';
+import { useSubscriptions } from '@/lib/context';
 
 interface CandlestickChartProps {
-  symbol: string;
   market: string;
 }
 
 const CandlestickChart: React.FC<CandlestickChartProps> = ({
-  symbol,
   market = 'USD'
 }) => {
+  const { symbol } = useSubscriptions();
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
   const seriesRef = useRef<ISeriesApi<'Candlestick'> | null>(null);

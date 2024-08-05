@@ -5,28 +5,30 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import cryptoList from '@/lib/cryptoList';
+import { useSubscriptions } from '@/lib/context';
 
-interface SymbolSelectProps {
-  handleSelectChange: (value: string) => void;
-  defaultValue: string;
+interface Symbol {
+  code: string;
+  name: string;
 }
 
-const SymbolSelect: React.FC<SymbolSelectProps> = ({
-  handleSelectChange,
-  defaultValue
-}) => {
+interface SymbolSelectProps {
+  symbols: Symbol[];
+}
+
+const SymbolSelect: React.FC<SymbolSelectProps> = ({ symbols }) => {
+  const { handleSelectChange, symbol } = useSubscriptions();
   return (
-    <Select defaultValue={defaultValue} onValueChange={handleSelectChange}>
+    <Select defaultValue={symbol} onValueChange={handleSelectChange}>
       <SelectTrigger className="mb-1 w-[180px]">
         <SelectValue placeholder="Choose currency..." />
       </SelectTrigger>
       <SelectContent>
-        {cryptoList.map((crypto) => (
-          <SelectItem value={crypto.code as string} key={crypto.code}>
+        {symbols.map((symbol) => (
+          <SelectItem value={symbol.code as string} key={symbol.code}>
             <div>
-              <span className="font-semibold">{crypto.code}</span>
-              <span className="text-sm text-gray-500"> - {crypto.name}</span>
+              <span className="font-semibold">{symbol.code}</span>
+              <span className="text-sm text-gray-500"> - {symbol.name}</span>
             </div>
           </SelectItem>
         ))}
