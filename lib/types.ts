@@ -19,3 +19,10 @@ export interface OrderBook {
   bids: Order[];
   asks: Order[];
 }
+
+export interface SubscriptionContextType {
+  symbol: string;
+  orderBook: OrderBook;
+  instrument: Instrument;
+  handleSelectChange: (value: string) => void;
+}
